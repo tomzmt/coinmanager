@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:background="@color/details_background_color">
+
+	<RelativeLayout 
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical"
+    	android:padding="@dimen/content_padding_normal">
+
+	    <LinearLayout
+	        android:id="@+id/image_container"
+	    	android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+    		android:layout_marginBottom="@dimen/content_padding_normal"
+	    	android:orientation="vertical"
+	    	android:gravity="center"
+			android:padding="@dimen/content_padding_normal"
+        	android:background="@color/image_background_color">
+
+	
+    		<ImageView
+        		android:id="@+id/coin_image"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:contentDescription="@string/averse"/>
+        			        
+	    </LinearLayout>
+
+		<View
+		    android:id="@+id/center"
+			android:layout_width="0dp"
+        	android:layout_height="0dp"
+        	android:layout_centerInParent="true"
+        	android:layout_margin="@dimen/content_padding_normal"
+        	android:visibility="invisible"/>
+
+    	<TextView
+        	android:id="@+id/currency"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@id/image_container"
+        	android:layout_toRightOf="@id/center"
+        	android:textSize="@dimen/details_value_text_size"
+        	android:textIsSelectable="false"/>
+
+    	<TextView
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@id/image_container"
+        	android:layout_toLeftOf="@id/center"
+        	android:layout_alignBaseline="@id/currency"
+        	android:text="@string/currency"
+        	android:textStyle="bold"
+        	android:textSize="@dimen/details_label_text_size"
+        	android:textIsSelectable="false"/>
+    	
+    	<TextView
+        	android:id="@+id/denomination"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+			android:layout_below="@id/currency"
+        	android:layout_toRightOf="@id/center"
+        	android:textSize="@dimen/details_value_text_size"
+        	android:textIsSelectable="false"/>
+
+    	<TextView
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@id/currency"
+        	android:layout_toLeftOf="@id/center"
+        	android:layout_alignBaseline="@id/denomination"
+        	android:textStyle="bold"
+        	android:textSize="@dimen/details_label_text_size"
+        	android:text="@string/denomination"
+        	android:textIsSelectable="false"/>
+    	
+	    <TextView
+    	    android:id="@+id/years"
+	        android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+			android:layout_below="@id/denomination"
+        	android:layout_toRightOf="@id/center"
+        	android:textSize="@dimen/details_value_text_size"
+        	android:textIsSelectable="false"/>
+
+	    <TextView
+	        android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@id/denomination"
+        	android:layout_toLeftOf="@id/center"
+        	android:layout_alignBaseline="@id/years"
+        	android:textStyle="bold"
+        	android:text="@string/years"
+        	android:textSize="@dimen/details_label_text_size"
+        	android:textIsSelectable="false"/>
+	    
+    	<TextView
+        	android:id="@+id/country"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@id/years"
+        	android:layout_toRightOf="@id/center"
+        	android:textSize="@dimen/details_value_text_size"
+        	android:textIsSelectable="false"/>
+
+    	<TextView
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_below="@id/years"
+        	android:layout_toLeftOf="@id/center"
+        	android:layout_alignBaseline="@id/country"
+        	android:textStyle="bold"
+        	android:text="@string/country"
+        	android:textSize="@dimen/details_label_text_size"
+        	android:textIsSelectable="false"/>
+    	
+	</RelativeLayout>
+
+</ScrollView>

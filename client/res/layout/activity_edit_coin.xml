@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/content_padding_normal">
+
+    <TextView
+        android:id="@+id/country"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/country"
+        android:textIsSelectable="false"/>
+    
+    <EditText
+        android:id="@+id/currency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/currency"
+        android:inputType="textNoSuggestions"/>
+    
+    <EditText
+        android:id="@+id/denomination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/denomination"
+        android:inputType="numberDecimal"/>
+
+    <EditText
+        android:id="@+id/years"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/years"
+        android:inputType="number"/>
+    
+	<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        
+	    <ImageView
+	        android:id="@+id/averse"
+	        android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_weight="1.0"
+        	android:src="@android:drawable/ic_menu_gallery"/>
+
+	    <ImageView
+	        android:id="@+id/reverse"
+	        android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_weight="1.0"
+        	android:src="@android:drawable/ic_menu_gallery"/>
+	    	    
+	</LinearLayout>	
+
+</LinearLayout>

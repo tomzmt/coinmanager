@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyCoins</string>
+    
+    <string name="ok">OK</string>
+    
+    <!-- MENU -->
+	<string name="add_new">Add new</string>
+    <string name="save">Save</string>
+    <string name="clear">Clear</string>
+    <string name="edit">Edit</string>
+    <string name="search">Search</string>
+    <string name="reset">Reset</string>
+
+    <!-- SEARCH -->
+    <string name="search_hint">Search coin</string>
+    
+    <!-- COIN LIST -->
+    <string name="icon">Coin icon</string>
+    
+    <!-- COIN DETAILS -->
+    <string name="country">Country</string>
+    <string name="currency">Currency</string>
+    <string name="denomination">Denomination</string>
+    <string name="years">Years</string>
+    <string name="averse">Averse</string>
+    <string name="reverse">Reverse</string>
+    
+    <!-- COUNTRY LIST -->
+    <string name="search_country_field_hint">Search country</string>
+    
+    <!-- NEW COUNTRY -->
+    <string name="country_name_hint">Country name</string>
+    <string name="main_currency_hint">Main currency</string>
+    <string name="secondary_currency">Secondary currency</string>
+    <string name="error_empty_country_name">Country name can\'t be empty</string>
+    <string name="error_empty_main_currency">Main currency not entered</string>
+    <string name="error_empty_secondary_currency">Secondary currency not entered</string>
+    
+</resources>
