@@ -12,6 +12,7 @@
     <string name="edit">Edit</string>
     <string name="search">Search</string>
     <string name="reset">Reset</string>
+    <string name="delete">Delete</string>
 
     <!-- SEARCH -->
     <string name="search_hint">Search coin</string>

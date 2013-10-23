@@ -2,7 +2,6 @@ package lt.tomzmt.mycoins.data;
 
 import lt.tomzmt.mycoins.data.entities.Coin;
 import lt.tomzmt.mycoins.data.entities.Country;
-import android.app.SearchManager;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;

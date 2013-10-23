@@ -13,24 +13,31 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class CoinsListActivity extends FragmentActivity implements OnItemClickListener,
-														   		   LoaderCallbacks<Cursor>{
+																   OnItemLongClickListener,
+														   		   LoaderCallbacks<Cursor>,
+														   		   ActionMode.Callback {
 
+	static final String TAG = CoinsListActivity.class.getSimpleName();
+	
 	private static final int COIN_LIST_LOADER = 1001;
 	
 	private static final String PARAM_SEARCH_QUERY = "CoinsListActivity.search_query";
 	
-	private static final String TAG = CoinsListActivity.class.getSimpleName();
-	
 	private CoinCursorAdapter mAdapter = null;
+	
+	private ActionMode mActionMode = null;
 	
 	/**
 	 * 
@@ -41,11 +48,11 @@ public class CoinsListActivity extends FragmentActivity implements OnItemClickLi
 		
 		setContentView(R.layout.activity_coins_list);
 		
-		((ListView)findViewById(R.id.list)).setOnItemClickListener(this);
-		
 		mAdapter = new CoinCursorAdapter(getApplicationContext(), null);
 		
 		ListView view = (ListView)findViewById(R.id.list);
+		view.setOnItemClickListener(this);
+		view.setOnItemLongClickListener(this);
 		view.setAdapter(mAdapter);
 		
 		Intent intent = getIntent();
@@ -68,19 +75,19 @@ public class CoinsListActivity extends FragmentActivity implements OnItemClickLi
 	private void handleIntent(Intent intent) {
 		String action = intent.getAction();
 		if (action != null && action.equals(Intent.ACTION_SEARCH)) {
-			Log.i(TAG, "so search");
+			
 			String query = intent.getStringExtra(SearchManager.QUERY);
 			Bundle args = new Bundle();
 			args.putString(PARAM_SEARCH_QUERY, query);
 			getSupportLoaderManager().restartLoader(COIN_LIST_LOADER, args, this);
+			
 		} else if (action != null && action.equals(Intent.ACTION_VIEW)) {
-			Log.i(TAG, "show details");
+			
 			Uri data = intent.getData();
 			Intent newIntent = new Intent(this, CoinDetailsActivity.class);
 			newIntent.putExtra(CoinDetailsActivity.CONTENT_URI, data);
 			startActivity(newIntent);
 		} else {
-			Log.i(TAG, "show all");
 			getSupportLoaderManager().initLoader(COIN_LIST_LOADER, null, this);
 		}
 	}
@@ -110,6 +117,13 @@ public class CoinsListActivity extends FragmentActivity implements OnItemClickLi
 		case R.id.action_reset:
 			getSupportLoaderManager().restartLoader(COIN_LIST_LOADER, null, this);
 			return true;
+		case R.id.action_edit:
+	        // Start the CAB using the ActionMode.Callback defined above
+	        mActionMode = startActionMode(this);
+	        ListView listView = (ListView)findViewById(R.id.list);
+	        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+	        listView.setItemsCanFocus(false);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -119,14 +133,115 @@ public class CoinsListActivity extends FragmentActivity implements OnItemClickLi
 	 * 
 	 */
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
-		Log.i(TAG, "ID: " + id);
-		Intent intent = new Intent(this, CoinDetailsActivity.class);
-		Uri uri = ContentUris.withAppendedId(Coin.DIR_URI, id);
-		intent.putExtra(CoinDetailsActivity.CONTENT_URI, uri);
-		startActivity(intent);
+	public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+		 if (mActionMode == null) {
+		
+			 Intent intent = new Intent(this, CoinDetailsActivity.class);
+			 Uri uri = ContentUris.withAppendedId(Coin.DIR_URI, id);
+			 intent.putExtra(CoinDetailsActivity.CONTENT_URI, uri);
+			 startActivity(intent);
+			 
+		 } else {
+			 
+			 ListView listView = (ListView)adapterView;
+			 SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
+			 
+			 boolean checked = checkedItems.get(position);			 
+		     listView.setItemChecked(position, checked);
+		 }
 	}
 	
+	/**
+	 * 
+	 */
+	@Override
+	public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+		
+        if (mActionMode != null) {
+            return false;
+        }
+
+        // Start the CAB using the ActionMode.Callback defined above
+        mActionMode = startActionMode(this);
+        ListView listView = (ListView)adapterView;
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listView.setItemsCanFocus(false);
+        listView.setItemChecked(position, true);
+		
+		return true;
+	}
+	
+	/**
+	 * Called when the action mode is created; startActionMode() was called
+	 */
+    @Override
+    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        MenuInflater inflater = mode.getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+        return true;
+    }
+
+    /**
+     * Called each time the action mode is shown. Always called after onCreateActionMode, but
+     * may be called multiple times if the mode is invalidated.
+     */ 
+    @Override
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        return false; // Return false if nothing is done
+    }
+    
+    /**
+     *  Called when the user selects a contextual menu item
+     */
+    @Override
+    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_delete:
+
+   			 	ListView listView = (ListView)findViewById(R.id.list);
+   			 	SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
+   			 	
+   			 	int count = checkedItems.size();
+   			 	String selection = "";
+   			 	String[] args = new String[count]; 
+   			 	for (int i = 0; i < checkedItems.size(); i++) {
+   			 		if (selection.length() != 0) {
+   			 			selection += ", ";
+   			 		}
+   			 		selection += "?";
+   			 		args[i] = String.valueOf(mAdapter.getItemId(checkedItems.keyAt(i)));
+   			 	}
+            	
+            	listView.clearChoices();
+   			 	
+            	getContentResolver().delete(Coin.DIR_URI, Coin.ID + " IN (" + selection + ")", args);
+            	
+                return true;
+            default:
+                return false;
+        }
+    }
+    
+    /**
+     *  Called when the user exits the action mode
+     */
+    @Override
+    public void onDestroyActionMode(ActionMode mode) {
+        final ListView listView = (ListView)findViewById(R.id.list);
+        SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
+        for (int i = 0; i < checkedItems.size(); i++) {
+        	listView.setItemChecked(i, false);
+        }
+        listView.clearChoices();
+        listView.post(new Runnable() {
+            @Override
+            public void run() {
+            	listView.setChoiceMode(ListView.CHOICE_MODE_NONE);
+            }
+        });
+        mActionMode = null;
+    }
+    
 	/**
 	 * 
 	 */

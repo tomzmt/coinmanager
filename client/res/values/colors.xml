@@ -4,6 +4,7 @@
     <color name="list_item_even_bg_color">#dddddd</color>
     <color name="list_item_odd_bg_color">#cecece</color>
     <color name="list_item_pressed_bg_color">#999999</color>
+    <color name="list_item_checked_bg_color">#5a9fab</color>
     
     <color name="image_background_color">#ffffff</color>
     

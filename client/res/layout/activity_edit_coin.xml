@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/currency"
-        android:inputType="textNoSuggestions"/>
+        android:inputType="textNoSuggestions|textCapWords"/>
     
     <EditText
         android:id="@+id/denomination"
