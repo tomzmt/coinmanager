@@ -4,7 +4,6 @@ import lt.tomzmt.mycoins.R;
 import lt.tomzmt.mycoins.data.entities.Coin;
 import lt.tomzmt.mycoins.ui.utils.ImageRotator;
 import lt.tomzmt.mycoins.ui.utils.ImageRotator.RotationCommand;
-import lt.tomzmt.mycoins.ui.utils.ImageUtils;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;

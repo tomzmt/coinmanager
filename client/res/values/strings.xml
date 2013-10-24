@@ -14,8 +14,12 @@
     <string name="reset">Reset</string>
     <string name="delete">Delete</string>
 
+    <!-- NAVIGATION ITEMS -->
+    <string name="navigation_item_1">Coins</string>
+    <string name="navigation_item_2">Countries</string>
+    
     <!-- SEARCH -->
-    <string name="search_hint">Search coin</string>
+    <string name="search_hint">Search</string>
     
     <!-- COIN LIST -->
     <string name="icon">Coin icon</string>
@@ -27,9 +31,6 @@
     <string name="years">Years</string>
     <string name="averse">Averse</string>
     <string name="reverse">Reverse</string>
-    
-    <!-- COUNTRY LIST -->
-    <string name="search_country_field_hint">Search country</string>
     
     <!-- NEW COUNTRY -->
     <string name="country_name_hint">Country name</string>

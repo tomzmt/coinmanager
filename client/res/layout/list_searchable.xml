@@ -8,12 +8,13 @@
         android:id="@+id/search_field"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/search_country_field_hint"
+        android:hint="@string/search_hint"
         android:inputType="textNoSuggestions|textCapWords"/>
 
     <ListView
         android:id="@+id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="#000000"/>
     
 </LinearLayout>

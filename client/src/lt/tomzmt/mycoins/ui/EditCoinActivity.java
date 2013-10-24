@@ -7,7 +7,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -110,7 +109,7 @@ public class EditCoinActivity extends FragmentActivity implements LoaderCallback
 				getContentResolver().insert(Coin.DIR_URI, values);
 			}
 			
-			Intent intent = new Intent(this, CoinsListActivity.class);
+			Intent intent = new Intent(this, HomeActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			
